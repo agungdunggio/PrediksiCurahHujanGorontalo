@@ -7,8 +7,9 @@ class Settings(BaseSettings):
     BASE_DIR: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     
     # Konfigurasi Model
-    MODEL_PATH: str = os.path.join(BASE_DIR, 'ml_models', 'model_LSTM_beta.h5')
-    TIME_STEP: int = 15
+    MODEL_PATH: str = os.path.join(BASE_DIR, 'ml_models', 'rainfall_model.h5')
+    SCALER_PATH: str = os.path.join(BASE_DIR, 'ml_models', 'scaler_features.pkl')
+    TIME_STEP: int = 60
     
     # Konfigurasi Buffer
     DATA_BUFFER_PATH: str = os.path.join(BASE_DIR, 'data', 'data_buffer.json')
