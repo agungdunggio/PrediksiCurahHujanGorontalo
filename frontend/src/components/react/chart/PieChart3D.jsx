@@ -84,8 +84,8 @@ const PieChart3D = () => {
   const [mousePos, setMousePos] = useState({ x: null, y: null });
 
   const data = [
-    { type: 'Data Train', value: 70, raw: 1424 },
-    { type: 'Data Test', value: 30, raw: 612 },
+    { type: 'Data Train', value: 80, raw: 1404 },
+    { type: 'Data Test', value: 20, raw: 351 },
   ];
 
   const colors = ['#00FFFF', '#FF00FF'];

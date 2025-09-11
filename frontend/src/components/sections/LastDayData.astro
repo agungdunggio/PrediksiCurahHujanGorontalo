@@ -1,21 +1,14 @@
 ---
 import RainfallChartAnimation from '../react/animation/RainfallChartAnimation';
 import ColumnChartSection from '../react/chart/ColumnChartSection.jsx';
+
+
 ---
 
 <section id="last-day-data" class="mt-64 mb-64 py-20 bg-gradient-to-b from-black to-black">
   <RainfallChartAnimation client:load />
 
   <div class="container max-w-5xl mx-auto px-6">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 rainfall-title">
-        Curah Hujan 15 Hari Terakhir
-      </h2>
-      <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto rainfall-subtitle">
-        Grafik ini menampilkan tren curah hujan harian selama 15 hari terakhir sebagai referensi monitoring kondisi cuaca terkini.
-      </p>
-    </div>
-
     <div class="rainfall-chart-container">
         <ColumnChartSection client:load />
     </div>

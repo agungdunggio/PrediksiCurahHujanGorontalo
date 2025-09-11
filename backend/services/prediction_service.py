@@ -5,12 +5,14 @@ from collections import deque
 from datetime import datetime, timedelta
 from tensorflow.keras.models import load_model
 from typing import List
+import joblib
 
 from core.config import settings 
 
 class PredictionService:
     def __init__(self):
         self.model = load_model(settings.MODEL_PATH)
+        self.scaler = joblib.load(settings.SCALER_PATH) 
         self.data_buffer = self._load_data_buffer()
         print("Prediction Service Initialized: Model and Buffer Loaded.")
 
@@ -76,24 +78,43 @@ class PredictionService:
         }
 
     def predict(self, n_days: int) -> List[dict]:
-        # Ambil hanya data sebelum hari ini, urutkan berdasarkan tanggal
-        today = datetime.now().date()
-        filtered = [item for item in self.data_buffer["buffer"] if datetime.strptime(item['date'], "%Y-%m-%d").date() < today]
-        # Urutkan ascending by date
-        filtered.sort(key=lambda x: x['date'])
-        # Ambil 15 data terakhir
-        history = [item['value'] for item in filtered[-settings.TIME_STEP:]]
-        if len(history) < settings.TIME_STEP:
+        self.data_buffer["buffer"].sort(key=lambda x: x['date'])
+        history_items = self.data_buffer["buffer"][-settings.TIME_STEP:]
+
+        if len(history_items) < settings.TIME_STEP:
             return []
+
+        history_values = [item['value'] for item in history_items]
+        last_date = datetime.strptime(history_items[-1]['date'], "%Y-%m-%d")
+
         predictions = []
-        # Tentukan tanggal mulai prediksi (hari terakhir di history)
-        last_date = datetime.strptime(filtered[-1]['date'], "%Y-%m-%d")
+        
+        # 1. SCALING INPUT
+        # Ubah list history menjadi numpy array dan scale
+        scaled_history = self.scaler.transform(np.array(history_values).reshape(-1, 1))
+        
+        # Buat temporary list untuk proses prediksi autoregressive
+        temp_input = list(scaled_history.flatten())
+
         for i in range(n_days):
-            input_seq = np.array(history[-settings.TIME_STEP:]).reshape((1, settings.TIME_STEP, 1))
-            next_pred = self.model.predict(input_seq, verbose=0)[0][0]
-            pred_date = (last_date + timedelta(days=i+1)).strftime("%Y-%m-%d")
-            predictions.append({"date": pred_date, "value": float(next_pred)})
-            history.append(next_pred)
+            input_seq_scaled = np.array(temp_input[-settings.TIME_STEP:]).reshape(1, settings.TIME_STEP, 1)
+            
+            # Model memprediksi berdasarkan data yang sudah di-scale
+            next_pred_scaled = self.model.predict(input_seq_scaled, verbose=0)
+            
+            # 2. INVERSE TRANSFORM (UNSCALING) OUTPUT
+            # Kembalikan prediksi ke skala aslinya (mm)
+            next_pred_real = self.scaler.inverse_transform(next_pred_scaled)[0][0]
+            # Pastikan tidak ada nilai negatif
+            next_pred_real = max(0, float(next_pred_real))
+
+            rounded_value = round(next_pred_real, 2)
+            pred_date = (last_date + timedelta(days=i + 1)).strftime("%Y-%m-%d")
+            predictions.append({"date": pred_date, "value": rounded_value})
+            
+            # Tambahkan hasil prediksi (yang sudah di-scale) ke input untuk iterasi berikutnya
+            temp_input.append(next_pred_scaled[0, 0])
+            
         return predictions
 
 # Buat satu instance service yang akan digunakan oleh seluruh aplikasi (singleton pattern)

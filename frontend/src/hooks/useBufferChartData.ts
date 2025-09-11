@@ -9,6 +9,7 @@ export function useBufferChartData(apiUrl: string = API_URL) {
   const [data, setData] = useState<ChartDataItem[]>([]);
   const [lastUpdate, setLastUpdate] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [current_size, setCurrentSize] = useState<number>(0);
 
   useEffect(() => {
     fetch(apiUrl, {
@@ -34,7 +35,7 @@ export function useBufferChartData(apiUrl: string = API_URL) {
 
         setData(sorted);
         setLastUpdate(formatUpdatedAt(json?.data?.updated_at || null));
-
+        setCurrentSize(json?.data?.current_size || sorted.length);
 
         setLoading(false);
       })
@@ -44,5 +45,5 @@ export function useBufferChartData(apiUrl: string = API_URL) {
       });
   }, [apiUrl]);
 
-  return { data, lastUpdate, loading };
+  return { data, lastUpdate, loading, current_size };
 }
