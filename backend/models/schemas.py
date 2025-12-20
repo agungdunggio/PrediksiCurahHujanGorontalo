@@ -55,3 +55,29 @@ class BufferStatusResponse(BaseAPIResponse):
     
 class DataAdditionResponse(BaseAPIResponse):
     data: Dict[str, Any]
+
+# === Schema untuk Data Historis ===
+class RainfallDataPoint(BaseModel):
+    rainfall: float
+    duration: Optional[int] = 10
+
+class HistoricalDataAddRequest(BaseModel):
+    date: date
+    rainfall: float
+    duration: Optional[int] = 10
+
+class HistoricalDataBulkAddRequest(BaseModel):
+    data: List[HistoricalDataAddRequest]
+
+class HistoricalDataUpdateRequest(BaseModel):
+    rainfall: Optional[float] = None
+    duration: Optional[int] = None
+
+class HistoricalDataResponse(BaseAPIResponse):
+    data: Dict[str, Any]
+
+class HistoricalDataListResponse(BaseAPIResponse):
+    location: str
+    unit: str
+    lastUpdated: str
+    data: Dict[str, Any]
