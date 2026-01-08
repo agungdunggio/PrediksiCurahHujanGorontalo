@@ -3,14 +3,14 @@ import DatasetAnimation from '../react/animation/DataSetAnimation.jsx';
 import PieChart3D from '../react/chart/PieChart3D.jsx';
 ---
 
-<section id="dataset" class="mt-64 mb-64 py-20 bg-gradient-to-b from-black to-black">
+<section id="dataset" class="mt-32 md:mt-64 mb-32 md:mb-64 py-12 md:py-20 bg-gradient-to-b from-black to-black overflow-hidden">
     <DatasetAnimation client:load />
-  <div class="container">
+  <div class="container mx-auto px-4 md:px-6">
     <div class="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
       <PieChart3D client:only="react" />
       <div class="w-full md:w-1/2 text-center md:text-left dataset-text">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Visualisasi Dataset</h2>
-        <p class="text-gray-400 max-w-2xl mx-auto md:mx-0">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4">Visualisasi Dataset</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto md:mx-0 text-sm md:text-base">
           Representasi visual dari proporsi dataset yang digunakan untuk melatih dan memvalidasi model prediksi curah hujan HydroVision.
         </p>
       </div>
