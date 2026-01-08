@@ -2,14 +2,14 @@
 // src/components/sections/Hero.astro
 import HeroAnimation from "../react/animation/HeroAnimation.jsx";
 ---
-<section class="relative overflow-hidden">
+<section class="relative overflow-hidden min-h-screen">
     <!-- VANTA BACKGROUND -->
     <div id="vanta-bg" class="absolute top-0 left-0 w-full h-full z-[-1] opacity-60"></div>
 
     <HeroAnimation client:load />
 
     <!-- NAVIGATION -->
-    <nav class="container mx-auto px-6 py-4 relative z-10">
+    <nav class="container mx-auto px-4 md:px-6 py-4 relative z-10">
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
                 <span class="text-xl font-bold text-white">Hydro<span class="gradient-text">Vision</span></span>
@@ -18,21 +18,21 @@ import HeroAnimation from "../react/animation/HeroAnimation.jsx";
     </nav>
 
     <!-- HERO CONTENT -->
-    <div class="h-screen flex items-center justify-center relative z-10 -mt-16">
-        <div class="container mx-auto px-6">
+    <div class="min-h-[calc(100vh-80px)] flex items-center justify-center relative z-10 py-8 md:py-0">
+        <div class="container mx-auto px-4 md:px-6">
             <div class="flex flex-col items-center text-center">
-                <h1 class="hero-title opacity-0 translate-y-10 text-xl md:text-5xl font-bold mb-6 max-w-3xl">
+                <h1 class="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 max-w-3xl leading-tight">
                     <span class="glow">Prediksi Curah Hujan Gorontalo</span> <br>
                     <span class="gradient-text">via API LSTM</span>
                 </h1>
-                <p class="hero-desc opacity-0 translate-y-10 text-sm md:text-base text-gray-300 mb-10 max-w-2xl">
-                    POST <code>/api/v1/predict</code> dengan <code is:raw>{ "n_days": 7 }</code> → dapat JSON prediksi hujan harian siap dipakai.
+                <p class="hero-desc text-sm md:text-base text-gray-300 mb-8 md:mb-10 max-w-2xl px-2">
+                    POST <code class="text-xs md:text-sm bg-gray-800/50 px-1.5 py-0.5 rounded">/api/v1/predict</code> dengan <code is:raw class="text-xs md:text-sm bg-gray-800/50 px-1.5 py-0.5 rounded">{ "n_days": 7 }</code> → dapat JSON prediksi hujan harian siap dipakai.
                 </p>            
-                <div class="hero-buttons flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#api" class="opacity-0 translate-y-10 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cyan-500/30">
+                <div class="hero-buttons flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 w-full sm:w-auto px-4 sm:px-0">
+                    <a href="#api" class="hero-btn bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold px-6 md:px-8 py-3 rounded-full transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cyan-500/30 text-sm md:text-base text-center">
                         Lihat Dokumentasi API
                     </a>
-                    <a href="#demo" class="opacity-0 translate-y-10 bg-transparent border border-blue-400 text-blue-400 font-semibold px-8 py-3 rounded-full hover:bg-blue-400 hover:bg-opacity-10 transition">
+                    <a href="#demo" class="hero-btn bg-transparent border border-blue-400 text-blue-400 font-semibold px-6 md:px-8 py-3 rounded-full hover:bg-blue-400 hover:bg-opacity-10 transition text-sm md:text-base text-center">
                         Coba Demo Langsung
                     </a>
                 </div>
@@ -83,5 +83,13 @@ import HeroAnimation from "../react/animation/HeroAnimation.jsx";
 <style>
     .glow {
         text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    }
+    
+    /* Hide hero elements initially, GSAP will animate them in */
+    .hero-title,
+    .hero-desc,
+    .hero-btn {
+        opacity: 0;
+        transform: translateY(30px);
     }
 </style>

@@ -4,7 +4,7 @@ import PerformanceAnimation from "../react/animation/PerformanceAnimation.jsx";
 import { Target, BarChart3 } from "lucide-react";
 ---
 
-<section id="model-performance" class="relative mt-64 mb-64 py-20 bg-black overflow-hidden">
+<section id="model-performance" class="relative mt-32 md:mt-64 mb-32 md:mb-64 py-12 md:py-20 bg-black overflow-hidden">
   <!-- background blob -->
   <div class="absolute inset-0 -z-10">
     <div id="blob-1" class="absolute top-[-100px] left-[-200px] w-[600px] h-[600px] bg-blue-900/50 rounded-full blur-3xl"></div>
@@ -16,19 +16,19 @@ import { Target, BarChart3 } from "lucide-react";
   <AuroraAnimation client:load />
   <PerformanceAnimation client:load />
 
-  <div class="container relative max-w-5xl mx-auto px-6">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">
+  <div class="container relative max-w-5xl mx-auto px-4 md:px-6">
+    <div class="text-center mb-10 md:mb-16">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2">
         Akurasi Prediksi Model
       </h2>
-      <p class="text-gray-300 text-sm md:text-base max-w-2xl mx-auto">
+      <p class="text-gray-300 text-sm md:text-base max-w-2xl mx-auto px-2">
         Kinerja model LSTM kami diukur menggunakan metrik standar untuk mengevaluasi tingkat kesalahan prediksi.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
       <!-- RMSE -->
-      <div class="metric-card relative overflow-hidden fx-border bg-white/5 border border-white/10 rounded-2xl p-6 text-center shadow-xl backdrop-blur-lg transition-all duration-300 hover:border-white/30 hover:-translate-y-1">
+      <div class="metric-card relative overflow-hidden fx-border bg-white/5 border border-white/10 rounded-2xl p-5 md:p-6 text-center shadow-xl backdrop-blur-lg transition-all duration-300 hover:border-white/30 hover:-translate-y-1">
         <!-- Glow Runner -->
         <div class="glow-runner absolute inset-0 opacity-0 pointer-events-none">
           <div class="glow-line absolute w-full h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent top-0 left-0"></div>
@@ -41,7 +41,7 @@ import { Target, BarChart3 } from "lucide-react";
           <Target className="metric-icon w-6 h-6 text-red-400" />
           <h3 class="text-lg font-semibold text-white">RMSE (Root Mean Square Error)</h3>
         </div>
-        <p class="text-5xl font-bold text-blue-400 my-4">
+        <p class="text-4xl md:text-5xl font-bold text-blue-400 my-3 md:my-4">
           <span class="metric-value" data-value="15.1547">0.0000</span>
         </p>
         <p class="text-gray-400 text-sm">
@@ -50,7 +50,7 @@ import { Target, BarChart3 } from "lucide-react";
       </div>
 
       <!-- MAE -->
-      <div class="metric-card relative overflow-hidden fx-border bg-white/5 border border-white/10 rounded-2xl p-6 text-center shadow-xl backdrop-blur-lg transition-all duration-300 hover:border-white/30 hover:-translate-y-1">
+      <div class="metric-card relative overflow-hidden fx-border bg-white/5 border border-white/10 rounded-2xl p-5 md:p-6 text-center shadow-xl backdrop-blur-lg transition-all duration-300 hover:border-white/30 hover:-translate-y-1">
         <!-- Glow Runner -->
         <div class="glow-runner absolute inset-0 opacity-0 pointer-events-none">
           <div class="glow-line absolute w-full h-[2px] bg-gradient-to-r from-transparent via-green-400 to-transparent top-0 left-0"></div>
@@ -63,7 +63,7 @@ import { Target, BarChart3 } from "lucide-react";
           <BarChart3 className="metric-icon w-6 h-6 text-green-400" />
           <h3 class="text-lg font-semibold text-white">MAE (Mean Absolute Error)</h3>
         </div>
-        <p class="text-5xl font-bold text-blue-400 my-4">
+        <p class="text-4xl md:text-5xl font-bold text-blue-400 my-3 md:my-4">
           <span class="metric-value" data-value="7.9584">0.0000</span>
         </p>
         <p class="text-gray-400 text-sm">

@@ -3,20 +3,20 @@ import DemoAnimation from "../react/animation/DemoAnimation.jsx";
 ---
 
 
-<section id="demo" class="mt-48 mb-48 py-20 bg-gradient-to-b from-black to-black">
+<section id="demo" class="mt-24 md:mt-48 mb-24 md:mb-48 py-12 md:py-20 bg-gradient-to-b from-black to-black overflow-hidden">
     <DemoAnimation client:load />
-    <div class="container mx-auto px-6">
-      <div class="demo-header text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Uji Coba <span class="gradient-text">API Prediksi</span></h2>
-        <p class="text-gray-400 max-w-2xl mx-auto">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="demo-header text-center mb-10 md:mb-16">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4">Uji Coba <span class="gradient-text">API Prediksi</span></h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-base px-2">
           Masukkan jumlah hari prediksi untuk wilayah Gorontalo dan lihat langsung respon dari model LSTM kami.
         </p>
       </div>
   
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 items-start">
         
-        <div class="demo-form bg-gray-800 rounded-xl p-8 border border-gray-700">
-          <h3 class="text-2xl font-bold text-white mb-6">Parameter Prediksi</h3>
+        <div class="demo-form bg-gray-800 rounded-xl p-5 md:p-8 border border-gray-700">
+          <h3 class="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Parameter Prediksi</h3>
           <form id="api-form" class="space-y-6">
             <div>
               <label for="days" class="block text-sm font-medium text-gray-300 mb-2">Jumlah Hari Prediksi</label>
@@ -32,8 +32,8 @@ import DemoAnimation from "../react/animation/DemoAnimation.jsx";
           </button>
         </div>
   
-        <div class="demo-result bg-gray-800 rounded-xl p-8 border border-gray-700 min-h-[300px] flex flex-col">
-          <h3 class="text-2xl font-bold text-white mb-6">Hasil Prediksi (Visual)</h3>
+        <div class="demo-result bg-gray-800 rounded-xl p-5 md:p-8 border border-gray-700 min-h-[250px] md:min-h-[300px] flex flex-col">
+          <h3 class="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Hasil Prediksi (Visual)</h3>
           
           <div id="response-container" class="response-container-scrollable space-y-3 flex-grow">
             <div class="text-center py-10 text-gray-500">
