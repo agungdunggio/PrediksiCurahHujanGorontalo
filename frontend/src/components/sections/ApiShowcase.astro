@@ -1,5 +1,35 @@
 ---
 import ApiShowcaseAnimation from "../react/animation/ApiShowcaseAnimation.jsx";
+
+const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000';
+
+const API_DISPLAY = API_URL.replace(/^https?:\/\//, '');
+
+
+const codeContent = `<span class="text-purple-400">POST</span> <span class="text-blue-400">/predict</span> HTTP/1.1
+<span class="text-purple-400">Host:</span> ${API_DISPLAY}
+<span class="text-purple-400">Content-Type:</span> application/json
+
+<span class="text-gray-500">// Response</span>
+{
+  <span class="text-yellow-400">"status"</span>: <span class="text-green-400">true</span>,
+  <span class="text-yellow-400">"message"</span>: <span class="text-green-400">"Prediksi curah hujan berhasil diambil"</span>,
+  <span class="text-yellow-400">"data"</span>: [
+    {
+      <span class="text-yellow-400">"location"</span>: <span class="text-green-400">"Gorontalo"</span>,
+      <span class="text-yellow-400">"unit"</span>: <span class="text-green-400">"mm/hari"</span>
+      <span class="text-yellow-400">"model_used"</span>: <span class="text-green-400">"lstm-v3.2.1"</span>,
+      <span class="text-yellow-400">"prediction_start"</span>: <span class="text-blue-400">"2025-07-01"</span>,
+      <span class="text-yellow-400">"prediction_end"</span>: <span class="text-blue-400">"2025-07-05"</span>
+      <span class="text-yellow-400">"predictions"</span>: [
+        {<span class="text-yellow-400">"date"</span>: <span class="text-green-400">"2025-07-01"</span>,<span class="text-yellow-400">"value"</span>: <span class="text-blue-400">2.4</span>},
+        {<span class="text-yellow-400">"date"</span>: <span class="text-green-400">"2025-07-02"</span>,<span class="text-yellow-400">"value"</span>: <span class="text-blue-400">0</span>},
+        {<span class="text-yellow-400">"date"</span>: <span class="text-green-400">"2025-07-03"</span>,<span class="text-yellow-400">"value"</span>: <span class="text-blue-400">1.7</span>},
+        <span class="text-gray-500">...</span>
+      ]
+    },
+  ],
+}`;
 ---
 <section id="api" class="mt-24 md:mt-48 mb-24 md:mb-48 py-12 md:py-20 bg-black overflow-hidden">
     <ApiShowcaseAnimation client:load />
@@ -41,33 +71,10 @@ import ApiShowcaseAnimation from "../react/animation/ApiShowcaseAnimation.jsx";
                         <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-500"></div>
                         <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-green-500"></div>
                     </div>
-                    <div class="text-xs md:text-sm text-gray-400 truncate">api.hydrovision.ai/predict</div>
+                    <div class="text-xs md:text-sm text-gray-400 truncate">{API_DISPLAY}/predict</div>
                 </div>
                 <div class="p-4 md:p-6 overflow-x-auto">
-                    <pre is:raw class="text-green-400 text-xs md:text-sm whitespace-pre-wrap break-words"><span class="text-purple-400">POST</span> <span class="text-blue-400">/api/v1/predict</span> HTTP/1.1
-<span class="text-purple-400">Host:</span> api.hydrovision.ai
-<span class="text-purple-400">Content-Type:</span> application/json
-
-<span class="text-gray-500">// Response</span>
-{
-  <span class="text-yellow-400">"status"</span>: <span class="text-green-400">true</span>,
-  <span class="text-yellow-400">"message"</span>: <span class="text-green-400">"Prediksi curah hujan berhasil diambil"</span>,
-  <span class="text-yellow-400">"data"</span>: [
-    {
-      <span class="text-yellow-400">"location"</span>: <span class="text-green-400">"Gorontalo"</span>,
-      <span class="text-yellow-400">"unit"</span>: <span class="text-green-400">"mm/hari"</span>
-      <span class="text-yellow-400">"model_used"</span>: <span class="text-green-400">"lstm-v3.2.1"</span>,
-      <span class="text-yellow-400">"prediction_start"</span>: <span class="text-blue-400">"2025-07-01"</span>,
-      <span class="text-yellow-400">"prediction_end"</span>: <span class="text-blue-400">"2025-07-05"</span>
-      <span class="text-yellow-400">"predictions"</span>: [
-        {<span class="text-yellow-400">"date"</span>: <span class="text-green-400">"2025-07-01"</span>,<span class="text-yellow-400">"value"</span>: <span class="text-blue-400">2.4</span>},
-        {<span class="text-yellow-400">"date"</span>: <span class="text-green-400">"2025-07-02"</span>,<span class="text-yellow-400">"value"</span>: <span class="text-blue-400">0</span>},
-        {<span class="text-yellow-400">"date"</span>: <span class="text-green-400">"2025-07-03"</span>,<span class="text-yellow-400">"value"</span>: <span class="text-blue-400">1.7</span>},
-        <span class="text-gray-500">...</span>
-      ]
-    },
-  ],
-}</pre>
+                    <pre class="text-green-400 text-xs md:text-sm whitespace-pre-wrap break-words" set:html={codeContent} />
                 </div>
             </div>
         </div>
