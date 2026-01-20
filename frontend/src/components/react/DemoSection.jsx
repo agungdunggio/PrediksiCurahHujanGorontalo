@@ -74,7 +74,7 @@ const ErrorState = ({ message }) => (
 
 // Main Demo Section Component
 const DemoSection = () => {
-  const [days, setDays] = useState(3);
+  const [days, setDays] = useState('3');
   const {
     predictions,
     rawJson,
@@ -89,7 +89,16 @@ const DemoSection = () => {
   } = usePrediction();
 
   const handleSubmit = () => {
-    fetchPrediction(days);
+    const numDays = parseInt(days) || 0;
+    fetchPrediction(numDays);
+  };
+
+  const handleDaysChange = (e) => {
+    const value = e.target.value;
+    // Hanya izinkan angka dan string kosong
+    if (value === '' || /^\d+$/.test(value)) {
+      setDays(value);
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -110,11 +119,13 @@ const DemoSection = () => {
               Jumlah Hari Prediksi
             </label>
             <input
-              type="number"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
               placeholder="Contoh: 7"
               id="days"
               value={days}
-              onChange={(e) => setDays(parseInt(e.target.value) || 0)}
+              onChange={handleDaysChange}
               onKeyDown={handleKeyDown}
               className="w-full p-3 rounded bg-gray-900 text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
               required
