@@ -95,28 +95,6 @@ curl -X POST http://localhost:8000/api/v1/predict \
   -H "Content-Type: application/json" \
   -d '{"n_days": 3}'
 ```
-
-### Tambah Data ke Buffer
-```bash
-curl -X POST http://localhost:8000/api/v1/add-data \
-  -H "Content-Type: application/json" \
-  -d '{"values": [10, 15, 12, 18, 14, 16, 13, 17, 11, 19, 15, 20, 14, 16, 18]}'
-```
-
-### Cek Status Buffer
-```bash
-curl http://localhost:8000/api/v1/buffer-status
-```
-
----
-
-## Catatan
-
-- **Model LSTM**: Pastikan file model (`model_LSTM_beta.h5`) sudah ada di folder `backend/models/`.
-- **Buffer Data**: Minimal 15 data point untuk prediksi, buffer disimpan di `backend/data/data_buffer.json`.
-- **Keamanan**: Beberapa endpoint mungkin membutuhkan API key (cek kode untuk detail).
-- **Pengembangan**: Silakan modifikasi frontend dan backend sesuai kebutuhan.
-
 ---
 
 ## Kontribusi
